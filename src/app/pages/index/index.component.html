@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <h1 class="text-center">Sample Form</h1>
+  <div [formGroup]="form" class="container-lg container-xl justify-content-center px-lg-5 px-xl-5">
+    <mat-form-field appearance="outline" class="extend">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" autocomplete="off" matInput placeholder="John Doe">
+      <mat-icon matPrefix>person</mat-icon>
+      <mat-error *ngIf="form.controls.name.invalid">{{getNameError(form.controls.name)}}</mat-error>
+    </mat-form-field>
+    <div class="row ">
+      <div class="col-12 col-lg-3 col-xl-3 ">
+        <mat-radio-group formControlName="searchBy" aria-label="Select an option">
+          <mat-label>Search By</mat-label>
+          <div class="row pt-2">
+            <div class="col-12 col-lg-6 col-xl-6">
+              <mat-radio-button value="email">Email</mat-radio-button>
+            </div>
+            <div class="col-12 col-lg-6 col-xl-6">
+              <mat-radio-button value="phone">Phone</mat-radio-button>
+            </div>
+          </div>
+        </mat-radio-group>
+      </div>
+      <div class="col-12 col-lg-9 col-xl-9">
+        <mat-form-field appearance="outline" class="extend">
+          <mat-label>{{searchByInputLabel()}}</mat-label>
+          <input (keypress)="check($event)"  formControlName="searchText" autocomplete="off" matInput placeholder="">
+          <mat-icon matPrefix>{{searchByInputIcon()}}</mat-icon>
+          <mat-error *ngIf="form.controls.searchText.invalid">{{getSearchTextError(form.controls.searchText)}}</mat-error>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <div class="d-flex justify-content-center">
+      <button [disabled]="!form.valid" (click)="submit()" mat-button>
+        Submit
+      </button>
+    </div>
+  </div>
+
+</div>
